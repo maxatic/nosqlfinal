@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#book-form").submit(function(event) {
+      // Prevent the default form submission behavior
+      event.preventDefault();
+
+      // Extract the values from the form fields
+      var link = $("#link").val();
+      var author = $("#author").val();
+      var description = $("#description").val();
+      var nop = $("#nop").val();
+      var address = $("#address").val();
+      var datePublished = $("#datePublished").val();
+      var genres = $("#genres").val();
+
+      // Send an AJAX request to the server with the form data
+      $.ajax({
+        url: "/v1/books",
+        method: "POST",
+        data: {
+          link: link,
+          author: author,
+          description: description,
+          nop: nop,
+          address: address,
+          datePublished: datePublished,
+          genres: genres
+        },
+        success: function(data) {
+          // Show a success message to the user
+          alert("Book added successfully!");
+        },
+        error: function(xhr, status, error) {
+          // Show an error message to the user
+          alert("Error adding book: " + error);
+        }
+      });
+    });
+  });
+</script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart | Ebookstore</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?
+      family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <!------------------ Header ------------------>
+    <div class="container">
+      <div class="navbar">
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/giga-logo.png" alt="EbookStore-Logo" />
+          </a>
+        </div>
+        <!----------  Nav Bar ------------------>
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ebooks.html">Ebooks</a></li>
+            <!-- <li><a href="">About</a></li>
+            <li><a href="">Contact</a></li> -->
+            <li><a href="account.html">Account</a></li>
+          </ul>
+        </nav>
+        <a href="cart.html">
+          <img
+            src="images/cart.png"
+            alt="Shoping Cart"
+            width="28px"
+            height="28px"
+            style="margin-left: 10px; margin-top: 15px"
+        /></a>
+        <img src="images/menu.png" class="menu-icon" onclick="menutoggle()" />
+      </div>
+    </div>
+
+    <!-- ---------- cart items details------------- -->
+    <center>
+    <div class="form-group">
+        <label class="col-md-4 control-label">Title</label>  
+        <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input  value="Yeah Aight" name="title" placeholder="Title" class="form-control"  type="text">
+          </div>
+        </div>
+      </div>
+      <br>
+      
+      <!-- Text input-->
+      
+      <div class="form-group">
+        <label class="col-md-4 control-label" >Link</label> 
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input value="https://www.gigachad.com/gigagiga" name="link" placeholder="Link" class="form-control"  type="text">
+          </div>
+        </div>
+      </div>
+      <br>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" >Author Name</label> 
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input value="To Kill a Mockingbird" name="author" placeholder="Author" class="form-control"  type="text">
+          </div>
+        </div>
+      </div>
+      <br>
+      
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Book Description</label>
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                  <textarea value="The unforgettable novel of a childhood in a sleepy
+                  Southern town and t..." class="form-control" name="description" placeholder="Book Description"></textarea>
+        </div>
+        </div>
+      </div>
+      <br>
+      <!-- Text input-->
+             
+      <div class="form-group">
+        <label class="col-md-4 control-label">Number of Pages</label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <input value="336" name="nop" placeholder="nop" class="form-control" type="number">
+          </div>
+        </div>
+      </div>
+      <br>
+      <!-- Text input-->
+            
+      
+      
+      <!-- Text input-->
+       
+      <div class="form-group">
+        <label class="col-md-4 control-label">Date Published</label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+        <input value="1960" type="number" min="1900" max="2099" step="1" value="2016" />
+          </div>
+        </div>
+      </div>
+      <br>
+      <!-- Select Basic -->
+         
+      <div class="form-group"> 
+        <label class="col-md-4 control-label">Genres of the book</label>
+          <div class="col-md-4 selectContainer">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+          <select name="state" class="form-control selectpicker" mul >
+            <option value="" >Genres of the book</option>
+            <option>Alabama</option>
+            <option>Alaska</option>
+            <option >Arizona</option>
+            <option >Arkansas</option>
+            <option >California</option>
+            <option >Colorado</option>
+            <option >Connecticut</option>
+            <option >Delaware</option>
+            <option >District of Columbia</option>
+            <option> Florida</option>
+            <option >Georgia</option>
+            <option >Hawaii</option>
+            <option >daho</option>
+            <option >Illinois</option>
+            <option >Indiana</option>
+            <option >Iowa</option>
+            <option> Kansas</option>
+            <option >Kentucky</option>
+            <option >Louisiana</option>
+            <option>Maine</option>
+            <option >Maryland</option>
+            <option> Mass</option>
+            <option >Michigan</option>
+            <option >Minnesota</option>
+            <option>Mississippi</option>
+            <option>Missouri</option>
+            <option>Montana</option>
+            <option>Nebraska</option>
+            <option>Nevada</option>
+            <option>New Hampshire</option>
+            <option>New Jersey</option>
+            <option>New Mexico</option>
+            <option>New York</option>
+            <option>North Carolina</option>
+            <option>North Dakota</option>
+            <option>Ohio</option>
+            <option>Oklahoma</option>
+            <option>Oregon</option>
+            <option>Pennsylvania</option>
+            <option>Rhode Island</option>
+            <option>South Carolina</option>
+            <option>South Dakota</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option> Uttah</option>
+            <option>Vermont</option>
+            <option>Virginia</option>
+            <option >Washington</option>
+            <option >West Virginia</option>
+            <option>Wisconsin</option>
+            <option >Wyoming</option>
+          </select>
+        </div>
+      </div>
+      </div>
+      
+     <br>
+      
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-warning" >Save <span class="glyphicon glyphicon-send"></span></button>
+        </div>
+      </div>
+      
+      </fieldset>
+      </form>
+      </div>
+    </center>
+
+
+    
+    <!-- ---------------------footer------------------- -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col-1">
+            <h3>Download Our App</h3>
+            <p>Download App for Android and ios mobile phone.</p>
+            <div class="app-logo">
+              <img src="images/Playstore.png" />
+              <img src="images/Applestore.png" />
+            </div>
+          </div>
+          <div class="footer-col-2">
+            <img src="images/giga-logo.png" />
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Reiciendis, Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <div class="footer-col-3">
+            <h3>Useful Links</h3>
+            <ul>
+              <li>Coupons</li>
+              <li>Blog Post</li>
+              <li>Return Policy</li>
+              <li>Join Affiliate</li>
+            </ul>
+          </div>
+          <div class="footer-col-4">
+            <h3>Follow us</h3>
+            <ul>
+              <li>Facebook</li>
+              <li>Youtube</li>
+              <li>Instagram</li>
+              <li>Twitterr</li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <p class="copyright">Copyright 2020 - EbookStore</p>
+      </div>
+    </div>
+    <!-- ---------Javascript for toggle menu------------- -->
+    <script>
+      var MenuItems = document.getElementById("MenuItems");
+      MenuItems.style.maxHeight = "0px";
+      function menutoggle() {
+        if (MenuItems.style.maxHeight == "0px") {
+          MenuItems.style.maxHeight = "200px";
+        } else {
+          MenuItems.style.maxHeight = "0px";
+        }
+      }
+    </script>
+  </body>
+</html>
